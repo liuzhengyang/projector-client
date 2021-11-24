@@ -141,11 +141,14 @@ dependencies {
   implementation("org.jsoup:jsoup:$jsoupVersion")
 
   compileOnly("com.jetbrains.intellij.platform:util-class-loader:$intellijPlatformVersion")
-  compileOnly("com.jetbrains.intellij.markdown:markdown:$intellijMarkdownPluginVersion")
+  compileOnly("com.jetbrains.intellij.markdown:markdown:$intellijMarkdownPluginVersion") {
+    exclude("org.jetbrains.kotlin")
+  }
 
   testImplementation(kotlin("test", kotlinVersion))
   testImplementation("com.jetbrains.intellij.markdown:markdown:$intellijMarkdownPluginVersion") {
     exclude("com.jetbrains.rd")
+    exclude("org.jetbrains.kotlin")
   }
 
   intTestImplementation("com.codeborne:selenide:$selenideVersion")

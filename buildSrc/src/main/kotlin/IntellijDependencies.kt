@@ -1,3 +1,9 @@
+import org.gradle.api.Project
+import org.gradle.api.artifacts.Dependency
+import org.gradle.kotlin.dsl.DependencyHandlerScope
+import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.provideDelegate
+
 /*
  * MIT License
  *
@@ -21,32 +27,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-@file:JsModule("react-loading-indicator")
-@file:JsNonModule
 
-package org.jetbrains.projector.client.web.externalDeclarartion
-
-import react.ComponentClass
-import react.Props
-
-@JsName("default")
-external val loadingIndicator: ComponentClass<LoadingIndicatorProps>
-
-external interface LoadingIndicatorProps : Props {
-
-  var color: Color
-  var segments: Int
-  var segmentWidth: Double
-  var segmentLength: Double
-  var spacing: Double
-  var fadeTo: Double
-  var fadeSteps: Double
-}
-
-external interface Color {
-
-  var red: Int
-  var green: Int
-  var blue: Int
-  var alpha: Double
+public fun Project.intellij(artifactId: String): Dependency {
+  val intellijPlatformVersion: String by project
+  dependencies {
+    //compileOnly("com.jetbrains.intellij.platform:$artifactId:$intellijPlatformVersion")
+  }
+  error("a")
 }

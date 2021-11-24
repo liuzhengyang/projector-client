@@ -26,7 +26,6 @@ plugins {
   kotlin("plugin.serialization")
   `maven-publish`
   jacoco
-  java
 }
 
 setupJacoco(isKotlinMpModule = true)
@@ -42,7 +41,7 @@ kotlin {
 
   sourceSets {
     all {
-      languageSettings.useExperimentalAnnotation("kotlin.RequiresOptIn")
+      languageSettings.optIn("kotlin.RequiresOptIn")
     }
 
     val commonMain by getting {

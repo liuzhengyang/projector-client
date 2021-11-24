@@ -49,7 +49,9 @@ dependencies {
   compileOnly("com.jetbrains.intellij.platform:ide-impl:$intellijPlatformVersion")
   compileOnly("com.jetbrains.intellij.platform:util-ui:$intellijPlatformVersion")
 
-  compileOnly("com.jetbrains.intellij.markdown:markdown:$intellijMarkdownPluginVersion")
+  compileOnly("com.jetbrains.intellij.markdown:markdown:$intellijMarkdownPluginVersion") {
+    exclude("org.jetbrains.kotlin")
+  }
   compileOnly("org.jetbrains.intellij.deps.jcef:jcef:$intellijJcefVersion")
 
   testImplementation(kotlin("test"))
