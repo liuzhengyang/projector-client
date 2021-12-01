@@ -136,9 +136,7 @@ class WindowDataEventsProcessor(internal val windowManager: WindowManager) {
   private fun removeAbsentWindows(presentedWindows: Iterable<WindowData>) {
     val presentedWindowIds = presentedWindows.map(WindowData::id).toSet()
 
-    synchronized(windowManager) {
-      windowManager.cleanup(presentedWindowIds)
-    }
+    windowManager.cleanup(presentedWindowIds)
   }
 
   fun onResized() {
