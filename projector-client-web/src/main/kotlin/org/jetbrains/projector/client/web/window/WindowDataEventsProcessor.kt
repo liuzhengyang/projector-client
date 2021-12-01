@@ -42,9 +42,7 @@ class WindowDataEventsProcessor(internal val windowManager: WindowManager) {
   private var excludedWindowIds = emptyList<Int>()
 
   fun drawPendingEvents() {
-    synchronized(windowManager) {
-      windowManager.forEach(Window::drawPendingEvents)
-    }
+    windowManager.forEach(Window::drawPendingEvents)
   }
 
   fun onClose() {
@@ -65,16 +63,14 @@ class WindowDataEventsProcessor(internal val windowManager: WindowManager) {
 
     removeAbsentWindows(presentedWindows)
 
-    synchronized(windowManager) {
-      presentedWindows.forEach { event ->
-        val window = windowManager.getOrCreate(event)
+    presentedWindows.forEach { event ->
+      val window = windowManager.getOrCreate(event)
 
-        event.cursorType?.let { window.cursorType = it }
-        window.title = event.title
-        window.isShowing = event.isShowing
-        window.bounds = event.bounds
-        window.zIndex = (event.zOrder - presentedWindows.size) * WindowManager.zIndexStride
-      }
+      event.cursorType?.let { window.cursorType = it }
+      window.title = event.title
+      window.isShowing = event.isShowing
+      window.bounds = event.bounds
+      window.zIndex = (event.zOrder - presentedWindows.size) * WindowManager.zIndexStride
     }
 
     setTitle(presentedWindows)
@@ -122,20 +118,18 @@ class WindowDataEventsProcessor(internal val windowManager: WindowManager) {
       return
     }
 
-    synchronized(windowManager) {
-      val window = windowManager[windowId]
+    val window = windowManager[windowId]
 
-      if (window == null) {
-        logger.error { "Skipping nonexistent window: $windowId" }
-        return
-      }
+    if (window == null) {
+      logger.error { "Skipping nonexistent window: $windowId" }
+      return
+    }
 
-      val newEvents = commands.shrinkByPaintEvents()
+    val newEvents = commands.shrinkByPaintEvents()
 
-      if (newEvents.isNotEmpty()) {
-        window.newDrawEvents.addAll(newEvents)
-        window.drawNewEvents()
-      }
+    if (newEvents.isNotEmpty()) {
+      window.newDrawEvents.addAll(newEvents)
+      window.drawNewEvents()
     }
   }
 
@@ -148,9 +142,7 @@ class WindowDataEventsProcessor(internal val windowManager: WindowManager) {
   }
 
   fun onResized() {
-    synchronized(windowManager) {
-      windowManager.forEach(Window::applyBounds)
-    }
+    windowManager.forEach(Window::applyBounds)
   }
 
   companion object {
