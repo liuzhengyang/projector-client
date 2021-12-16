@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDceDsl
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDistributionDsl
 
 plugins {
   kotlin("js")
@@ -61,12 +61,13 @@ dependencies {
 }
 
 kotlin {
-  js {
+  js(IR) {
     browser {
-      @OptIn(ExperimentalDceDsl::class)
-      dceTask {
-        keep.add("projector-client-projector-client-web.org.jetbrains.projector.client.web.onLoad")
+      @OptIn(ExperimentalDistributionDsl::class)
+      distribution {
+        directory = project.file("build/distributions")
       }
     }
+    binaries.executable()
   }
 }
