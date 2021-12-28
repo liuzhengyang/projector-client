@@ -15,7 +15,7 @@ publishToSpace("java")
 val intellijPlatformVersion: String by project
 
 dependencies {
-  api(project(":projector-common"))
+  compileOnly(project(":projector-common"))
   api(project(":projector-util-logging"))
 
   compileOnly("com.jetbrains.intellij.platform:bootstrap:$intellijPlatformVersion")
